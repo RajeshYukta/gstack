@@ -96,7 +96,7 @@ When the user types `/mastery-plan`, run this skill.
 
 ```bash
 _ROOT=$(git rev-parse --show-toplevel 2>/dev/null || echo ".")
-ls "$_ROOT"/docs/project-roadmap.md "$_ROOT"/docs/mastery-compact.md 2>/dev/null
+ls "$_ROOT"/docs/project-roadmap.md "$_ROOT"/docs/mastery.md 2>/dev/null
 ```
 
 **If not a Mastery project:** Use AskUserQuestion:
@@ -111,7 +111,7 @@ ls "$_ROOT"/docs/project-roadmap.md "$_ROOT"/docs/mastery-compact.md 2>/dev/null
 If A: Tell user to run `/mastery-init`. Stop.
 If B: Stop.
 
-**If Mastery exists:** Read `docs/mastery-compact.md` for framework rules, then continue.
+**If Mastery exists:** Read the **Agent Boot block** at the top of `docs/mastery.md` for framework rules, then continue.
 
 ---
 

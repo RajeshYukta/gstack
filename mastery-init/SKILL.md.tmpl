@@ -30,7 +30,7 @@ When the user types `/mastery-init`, run this skill.
 
 ```bash
 _ROOT=$(git rev-parse --show-toplevel 2>/dev/null || echo ".")
-ls "$_ROOT"/docs/mastery.md "$_ROOT"/docs/mastery-compact.md "$_ROOT"/docs/project-context.md 2>/dev/null
+ls "$_ROOT"/docs/mastery.md "$_ROOT"/docs/project-context.md 2>/dev/null
 ```
 
 **If `docs/mastery.md` already exists:** Use AskUserQuestion:
@@ -53,9 +53,8 @@ If C: Stop.
 
 ## Step 2: Get the framework files
 
-The Mastery framework consists of two files that go into `docs/`:
-- `mastery.md` — Full framework with all 16 templates (~25k tokens)
-- `mastery-compact.md` — AI-optimized rules only (~6k tokens)
+The Mastery framework is a single file that goes into `docs/`:
+- `mastery.md` — the complete framework; the Agent Boot block at the top gives AI agents a 30-second orientation, the rest (templates included) loads on demand
 
 ```bash
 mkdir -p "$_ROOT/docs/features" "$_ROOT/docs/references"
@@ -63,7 +62,7 @@ mkdir -p "$_ROOT/docs/features" "$_ROOT/docs/references"
 
 Use AskUserQuestion:
 
-> I need to set up the Mastery framework files. The framework is two Markdown files that define your project's development lifecycle.
+> I need to set up the Mastery framework file. The framework is a single Markdown file that defines your project's development lifecycle.
 >
 > RECOMMENDATION: Choose A — it's the fastest way to get started.
 >
@@ -74,12 +73,11 @@ Use AskUserQuestion:
 If A: Run:
 ```bash
 curl -sL "https://raw.githubusercontent.com/RAiWorks/MASTERY.md/main/mastery.md" -o "$_ROOT/docs/mastery.md"
-curl -sL "https://raw.githubusercontent.com/RAiWorks/MASTERY.md/main/mastery-compact.md" -o "$_ROOT/docs/mastery-compact.md"
-echo "Downloaded mastery.md and mastery-compact.md to docs/"
+echo "Downloaded mastery.md to docs/"
 ```
-Verify the downloads aren't empty. If curl fails, tell the user to download manually from `https://github.com/RAiWorks/MASTERY.md` and place files in `docs/`.
+Verify the download isn't empty. If curl fails, tell the user to download manually from `https://github.com/RAiWorks/MASTERY.md` and place the file in `docs/`.
 
-If B: Tell user to place `mastery.md` and `mastery-compact.md` in the project's `docs/` folder. Wait for confirmation, then verify the files exist.
+If B: Tell user to place `mastery.md` in the project's `docs/` folder. Wait for confirmation, then verify the file exists.
 
 If C: Create placeholder files and tell user to paste content into them.
 
@@ -87,7 +85,7 @@ If C: Create placeholder files and tell user to paste content into them.
 
 ## Step 3: Run the project discussion
 
-Read `docs/mastery-compact.md` to understand the framework rules (context loading order).
+Read the **Agent Boot block** at the top of `docs/mastery.md` to understand the framework rules (context loading order).
 
 Now start the project discussion. Use AskUserQuestion:
 
@@ -174,7 +172,7 @@ Create `docs/project-changelog.md` with an empty `## [Unreleased]` section. Sear
 
 ```bash
 cd "$_ROOT"
-git add docs/mastery.md docs/mastery-compact.md docs/project-discussion.md docs/project-context.md docs/project-roadmap.md docs/project-changelog.md AGENTS.md
+git add docs/mastery.md docs/project-discussion.md docs/project-context.md docs/project-roadmap.md docs/project-changelog.md AGENTS.md
 git status
 ```
 
@@ -182,8 +180,7 @@ Use AskUserQuestion:
 
 > Mastery is set up! Here's what was created:
 >
-> - `docs/mastery.md` — Framework (full)
-> - `docs/mastery-compact.md` — Framework (compact, for AI)
+> - `docs/mastery.md` — Framework
 > - `docs/project-discussion.md` — Project discussion
 > - `docs/project-context.md` — Project identity
 > - `docs/project-roadmap.md` — Feature roadmap
@@ -214,7 +211,6 @@ Next:        Feature #01 — {name}
 
 Files created:
   docs/mastery.md
-  docs/mastery-compact.md
   docs/project-discussion.md
   docs/project-context.md
   docs/project-roadmap.md
